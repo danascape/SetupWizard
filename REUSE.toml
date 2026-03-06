@@ -13,7 +13,7 @@ SPDX-FileCopyrightText = "2019 The Android Open Source Project"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
-path = [".gitignore", "app/.gitignore"]
+path = ["README.md", ".gitignore", "app/.gitignore"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023 The LineageOS Project"
 SPDX-License-Identifier = "Apache-2.0"
