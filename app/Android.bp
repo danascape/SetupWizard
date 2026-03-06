@@ -1,12 +1,14 @@
 //
-// SPDX-FileCopyrightText: 2021-2025 The LineageOS Project
+// SPDX-FileCopyrightText: 2021-2026 The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
 android_app {
     name: "LineageSetupWizard",
 
-    srcs: ["src/**/*.java"],
+    srcs: ["src/main/java/**/*.java"],
+    resource_dirs: ["src/main/res"],
+    manifest: "src/main/AndroidManifest.xml",
 
     certificate: "platform",
     privileged: true,
