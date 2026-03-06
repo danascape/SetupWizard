@@ -9,7 +9,7 @@ package org.lineageos.setupwizard.wizardmanager
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.Intent.URI_INTENT_SCHEME
 
-import org.lineageos.setupwizard.SetupWizardApp.LOGV
+import org.lineageos.setupwizard.SetupWizardApp.Companion.LOGV
 
 import android.content.Intent
 import android.os.Parcel
