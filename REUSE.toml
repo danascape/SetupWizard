@@ -11,3 +11,15 @@ path = ["app/src/main/res/raw/lottie_system_nav_3_button.json", "app/src/main/re
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2019 The Android Open Source Project"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = [".gitignore", "app/.gitignore"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023 The LineageOS Project"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "gradle/wrapper/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2007-2023 Gradle, Inc."
+SPDX-License-Identifier = "Apache-2.0"
