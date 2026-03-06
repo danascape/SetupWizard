@@ -29,8 +29,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                style="@style/LocaleWidget.Material.LocalePicker" />
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
