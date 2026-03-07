@@ -19,3 +19,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SetupWizard"
 include(":app")
+include(":setupcompat")
+include(":setupdesign")
