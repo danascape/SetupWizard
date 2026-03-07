@@ -1,0 +1,22 @@
+#
+# SPDX-FileCopyrightText: 2026 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+
+[versions]
+androidGradlePlugin = "8.10.1"
+kotlin = { strictly = "2.1.10" }
+lottie = "6.4.1"
+material = { strictly = "1.13.0-alpha08" }
+androidx-core = { strictly = "1.16.0-beta01" }
+
+[libraries]
+google-material = { module = 'com.google.android.material:material', version.ref = 'material' }
+
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+jetbrains-kotlin-android  = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
