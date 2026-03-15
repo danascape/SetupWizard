@@ -206,7 +206,7 @@ abstract class BaseSetupWizardActivity : AppCompatActivity(), NavigationBarListe
     protected open fun decorateIntent(intent: Intent): Intent = intent
         .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, isFirstRun())
         .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true)
-        .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V4)
+        .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_EXPRESSIVE)
 
     override fun startActivity(intent: Intent) {
         super.startActivity(decorateIntent(intent))
