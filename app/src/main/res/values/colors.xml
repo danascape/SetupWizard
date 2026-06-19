@@ -11,4 +11,49 @@
     <color name="button_bar_text_disabled">#321e1e1e</color>
 
     <color name="divider">#40000000</color>
+
+    <!-- Filled primary (next) footer button: framework dynamic primary / on-primary pair, applied
+         directly to the button view (see BaseSetupWizardActivity.applyPrimaryButtonColors). -->
+    <color name="setup_footer_primary_button_background">@*android:color/system_primary_light</color>
+    <color name="setup_footer_primary_button_text">@*android:color/system_on_primary_light</color>
+
+    <!--
+         Align Material3's color-role tokens with the framework's dynamic (Monet) color palette, the
+         same way PixelSetupWizardOverlayExpressive_GMS does for the Pixel SetupWizard. Without this,
+         Material's colorPrimary/colorOnPrimary fall back to the library's baseline palette, which
+         does not match setupdesign's sud_system_* colors, leaving the filled (primary) footer
+         button's label unreadable on its own fill. App resources override the Material library's
+         defaults at merge time. (Light variants; see values-night for dark.)
+    -->
+    <color name="materialColorPrimary">@*android:color/system_primary_light</color>
+    <color name="materialColorOnPrimary">@*android:color/system_on_primary_light</color>
+    <color name="materialColorPrimaryContainer">@*android:color/system_primary_container_light</color>
+    <color name="materialColorOnPrimaryContainer">@*android:color/system_on_primary_container_light</color>
+    <color name="materialColorSecondary">@*android:color/system_secondary_light</color>
+    <color name="materialColorOnSecondary">@*android:color/system_on_secondary_light</color>
+    <color name="materialColorSecondaryContainer">@*android:color/system_secondary_container_light</color>
+    <color name="materialColorOnSecondaryContainer">@*android:color/system_on_secondary_container_light</color>
+    <color name="materialColorTertiary">@*android:color/system_tertiary_light</color>
+    <color name="materialColorOnTertiary">@*android:color/system_on_tertiary_light</color>
+    <color name="materialColorTertiaryContainer">@*android:color/system_tertiary_container_light</color>
+    <color name="materialColorOnTertiaryContainer">@*android:color/system_on_tertiary_container_light</color>
+    <color name="materialColorBackground">@*android:color/system_background_light</color>
+    <color name="materialColorOnBackground">@*android:color/system_on_background_light</color>
+    <color name="materialColorSurface">@*android:color/system_surface_light</color>
+    <color name="materialColorOnSurface">@*android:color/system_on_surface_light</color>
+    <color name="materialColorSurfaceVariant">@*android:color/system_surface_variant_light</color>
+    <color name="materialColorOnSurfaceVariant">@*android:color/system_on_surface_variant_light</color>
+    <color name="materialColorSurfaceBright">@*android:color/system_surface_bright_light</color>
+    <color name="materialColorSurfaceDim">@*android:color/system_surface_dim_light</color>
+    <color name="materialColorSurfaceContainer">@*android:color/system_surface_container_light</color>
+    <color name="materialColorSurfaceContainerHigh">@*android:color/system_surface_container_high_light</color>
+    <color name="materialColorSurfaceContainerHighest">@*android:color/system_surface_container_highest_light</color>
+    <color name="materialColorSurfaceContainerLow">@*android:color/system_surface_container_low_light</color>
+    <color name="materialColorSurfaceContainerLowest">@*android:color/system_surface_container_lowest_light</color>
+    <color name="materialColorOutline">@*android:color/system_outline_light</color>
+    <color name="materialColorOutlineVariant">@*android:color/system_outline_variant_light</color>
+    <color name="materialColorError">@*android:color/system_error_light</color>
+    <color name="materialColorOnError">@*android:color/system_on_error_light</color>
+    <color name="materialColorErrorContainer">@*android:color/system_error_container_light</color>
+    <color name="materialColorOnErrorContainer">@*android:color/system_on_error_container_light</color>
 </resources>

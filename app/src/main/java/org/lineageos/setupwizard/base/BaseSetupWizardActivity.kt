@@ -8,6 +8,7 @@ package org.lineageos.setupwizard.base
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.net.wifi.WifiManager
 import android.os.Bundle
@@ -23,6 +24,8 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.android.settingslib.Utils
+import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupcompat.util.ResultCodes.RESULT_SKIP
 import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.android.setupdesign.GlifLayout
@@ -31,12 +34,12 @@ import com.google.android.setupdesign.util.ThemeHelper
 import org.lineageos.setupwizard.R
 import org.lineageos.setupwizard.SetupWizardApp.Companion.LOGV
 import org.lineageos.setupwizard.util.SetupWizardUtils
-import org.lineageos.setupwizard.widget.NavigationLayout
-import org.lineageos.setupwizard.widget.NavigationLayout.NavigationBarListener
 
-abstract class BaseSetupWizardActivity : AppCompatActivity(), NavigationBarListener {
+abstract class BaseSetupWizardActivity : AppCompatActivity() {
 
-    private var mNavigationBar: NavigationLayout? = null
+    private var footerBarMixin: FooterBarMixin? = null
+    private var nextButton: FooterButton? = null
+    private var skipButton: FooterButton? = null
     private lateinit var nextIntentResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +50,9 @@ abstract class BaseSetupWizardActivity : AppCompatActivity(), NavigationBarListe
         nextIntentResultLauncher =
             registerForActivityResult(StartDecoratedActivityForResult(), this::onNextIntentResult)
         initLayout()
-        mNavigationBar = getNavigationBar()
-        mNavigationBar?.setNavigationBarListener(this)
+        if (installFooterBar) {
+            setupFooterBar()
+        }
         onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
@@ -120,14 +124,53 @@ abstract class BaseSetupWizardActivity : AppCompatActivity(), NavigationBarListe
     }
 
     /**
-     * @return The navigation bar instance in the layout, or null if the layout does not have a
-     *   navigation bar.
+     * Sets up the footer bar buttons via the [GlifLayout]'s [FooterBarMixin], matching the standard
+     * Setup Wizard footer. The "next" (primary) button is always present; the "skip" (secondary)
+     * button is only added when [showSkipButton] is true.
      */
-    fun getNavigationBar(): NavigationLayout? =
-        findViewById<View>(R.id.navigation_bar) as? NavigationLayout
+    private fun setupFooterBar() {
+        val mixin = getGlifLayout().getMixin(FooterBarMixin::class.java)
+        footerBarMixin = mixin
+
+        nextButton =
+            FooterButton.Builder(this)
+                .setText(R.string.next)
+                .setListener { onNextPressed() }
+                .setButtonType(FooterButton.ButtonType.NEXT)
+                .build()
+                .also { mixin.setPrimaryButton(it) }
+
+        applyPrimaryButtonColors()
+
+        if (showSkipButton) {
+            skipButton =
+                FooterButton.Builder(this)
+                    .setText(R.string.skip)
+                    .setListener { onSkipPressed() }
+                    .setButtonType(FooterButton.ButtonType.SKIP)
+                    .build()
+                    .also { mixin.setSecondaryButton(it) }
+        }
+    }
+
+    /**
+     * Pin the filled primary (next) button to the framework dynamic primary / on-primary color pair
+     * directly on the inflated view. FooterBarMixin's own color pipeline
+     * (partner/dynamic/expressive) is not wired up on this build, so without this the label can
+     * fail to contrast with the fill. This must be re-applied whenever the button's enabled state
+     * or text changes, because FooterBarMixin re-applies its own text color on those events.
+     */
+    private fun applyPrimaryButtonColors() {
+        footerBarMixin?.primaryButtonView?.apply {
+            backgroundTintList =
+                ColorStateList.valueOf(getColor(R.color.setup_footer_primary_button_background))
+            setTextColor(getColor(R.color.setup_footer_primary_button_text))
+        }
+    }
 
     fun setNextAllowed(allowed: Boolean) {
-        mNavigationBar?.nextButton?.isEnabled = allowed
+        nextButton?.isEnabled = allowed
+        applyPrimaryButtonColors()
     }
 
     protected open fun onNextPressed() {
@@ -139,25 +182,18 @@ abstract class BaseSetupWizardActivity : AppCompatActivity(), NavigationBarListe
     }
 
     protected fun setNextText(resId: Int) {
-        mNavigationBar?.nextButton?.setText(resId)
+        nextButton?.setText(this, resId)
+        applyPrimaryButtonColors()
     }
 
-    fun getNextButton(): Button = mNavigationBar!!.nextButton
+    fun getNextButton(): Button = footerBarMixin!!.primaryButtonView
 
     protected fun setSkipText(resId: Int) {
-        mNavigationBar?.skipButton?.setText(resId)
+        skipButton?.setText(this, resId)
     }
 
     protected fun hideNextButton() {
-        mNavigationBar?.nextButton?.visibility = INVISIBLE
-    }
-
-    override fun onNavigateNext() {
-        onNextPressed()
-    }
-
-    override fun onSkip() {
-        onSkipPressed()
+        nextButton?.visibility = INVISIBLE
     }
 
     protected fun onSetupStart() {
@@ -245,6 +281,12 @@ abstract class BaseSetupWizardActivity : AppCompatActivity(), NavigationBarListe
     protected open val titleResId: Int = -1
 
     protected open val iconResId: Int = -1
+
+    /** Whether to install the [FooterBarMixin] footer buttons on this screen's [GlifLayout]. */
+    protected open val installFooterBar: Boolean = true
+
+    /** Whether the footer bar should show a secondary "skip" button. */
+    protected open val showSkipButton: Boolean = false
 
     protected open fun applyForwardTransition() {
         TransitionHelper.applyForwardTransition(this, DEFAULT_TRANSITION, true)

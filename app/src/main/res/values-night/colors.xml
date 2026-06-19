@@ -5,4 +5,41 @@
 -->
 <resources>
     <color name="divider">#40ffffff</color>
+
+    <!-- Filled primary (next) footer button: dark variants; see values/colors.xml. -->
+    <color name="setup_footer_primary_button_background">@*android:color/system_primary_dark</color>
+    <color name="setup_footer_primary_button_text">@*android:color/system_on_primary_dark</color>
+
+    <!-- Dark variants of the Material role tokens; see values/colors.xml for the rationale. -->
+    <color name="materialColorPrimary">@*android:color/system_primary_dark</color>
+    <color name="materialColorOnPrimary">@*android:color/system_on_primary_dark</color>
+    <color name="materialColorPrimaryContainer">@*android:color/system_primary_container_dark</color>
+    <color name="materialColorOnPrimaryContainer">@*android:color/system_on_primary_container_dark</color>
+    <color name="materialColorSecondary">@*android:color/system_secondary_dark</color>
+    <color name="materialColorOnSecondary">@*android:color/system_on_secondary_dark</color>
+    <color name="materialColorSecondaryContainer">@*android:color/system_secondary_container_dark</color>
+    <color name="materialColorOnSecondaryContainer">@*android:color/system_on_secondary_container_dark</color>
+    <color name="materialColorTertiary">@*android:color/system_tertiary_dark</color>
+    <color name="materialColorOnTertiary">@*android:color/system_on_tertiary_dark</color>
+    <color name="materialColorTertiaryContainer">@*android:color/system_tertiary_container_dark</color>
+    <color name="materialColorOnTertiaryContainer">@*android:color/system_on_tertiary_container_dark</color>
+    <color name="materialColorBackground">@*android:color/system_background_dark</color>
+    <color name="materialColorOnBackground">@*android:color/system_on_background_dark</color>
+    <color name="materialColorSurface">@*android:color/system_surface_dark</color>
+    <color name="materialColorOnSurface">@*android:color/system_on_surface_dark</color>
+    <color name="materialColorSurfaceVariant">@*android:color/system_surface_variant_dark</color>
+    <color name="materialColorOnSurfaceVariant">@*android:color/system_on_surface_variant_dark</color>
+    <color name="materialColorSurfaceBright">@*android:color/system_surface_bright_dark</color>
+    <color name="materialColorSurfaceDim">@*android:color/system_surface_dim_dark</color>
+    <color name="materialColorSurfaceContainer">@*android:color/system_surface_container_dark</color>
+    <color name="materialColorSurfaceContainerHigh">@*android:color/system_surface_container_high_dark</color>
+    <color name="materialColorSurfaceContainerHighest">@*android:color/system_surface_container_highest_dark</color>
+    <color name="materialColorSurfaceContainerLow">@*android:color/system_surface_container_low_dark</color>
+    <color name="materialColorSurfaceContainerLowest">@*android:color/system_surface_container_lowest_dark</color>
+    <color name="materialColorOutline">@*android:color/system_outline_dark</color>
+    <color name="materialColorOutlineVariant">@*android:color/system_outline_variant_dark</color>
+    <color name="materialColorError">@*android:color/system_error_dark</color>
+    <color name="materialColorOnError">@*android:color/system_on_error_dark</color>
+    <color name="materialColorErrorContainer">@*android:color/system_error_container_dark</color>
+    <color name="materialColorOnErrorContainer">@*android:color/system_on_error_container_dark</color>
 </resources>
