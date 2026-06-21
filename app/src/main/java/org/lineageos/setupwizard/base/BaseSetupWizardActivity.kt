@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.view.View.INVISIBLE
 import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
@@ -39,7 +38,6 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
 
     private var footerBarMixin: FooterBarMixin? = null
     private var nextButton: FooterButton? = null
-    private var skipButton: FooterButton? = null
     private lateinit var nextIntentResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,13 +141,13 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
         applyPrimaryButtonColors()
 
         if (showSkipButton) {
-            skipButton =
+            mixin.setSecondaryButton(
                 FooterButton.Builder(this)
                     .setText(R.string.skip)
                     .setListener { onSkipPressed() }
                     .setButtonType(FooterButton.ButtonType.SKIP)
                     .build()
-                    .also { mixin.setSecondaryButton(it) }
+            )
         }
     }
 
@@ -187,14 +185,6 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
     }
 
     fun getNextButton(): Button = footerBarMixin!!.primaryButtonView
-
-    protected fun setSkipText(resId: Int) {
-        skipButton?.setText(this, resId)
-    }
-
-    protected fun hideNextButton() {
-        nextButton?.visibility = INVISIBLE
-    }
 
     protected fun onSetupStart() {
         if (SetupWizardUtils.isOwner()) {

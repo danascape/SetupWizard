@@ -91,13 +91,31 @@ object SetupWizardUtils {
     fun isManagedProfile(context: Context): Boolean =
         context.getSystemService(UserManager::class.java).isManagedProfile()
 
+    /**
+     * Lock down the status bar for setup while keeping it visible.
+     *
+     * This mirrors the framework's [StatusBarManager.DEFAULT_SETUP_DISABLE_FLAGS] used by
+     * [StatusBarManager.setDisabledForSetup] (notification alerts, home, shade expansion, recents
+     * and search are all disabled) but intentionally omits [StatusBarManager.DISABLE_CLOCK] so the
+     * transparent status bar still renders the clock alongside the system icons. The GLIF
+     * Expressive template reserves the status-bar inset via fitsSystemWindows, so a fully blanked
+     * bar leaves an empty gap above the header; showing the bar makes that reserved space read as
+     * intended, matching the GMS SetupWizard.
+     */
+    private val SETUP_DISABLE_FLAGS =
+        StatusBarManager.DISABLE_NOTIFICATION_ALERTS or
+            StatusBarManager.DISABLE_HOME or
+            StatusBarManager.DISABLE_EXPAND or
+            StatusBarManager.DISABLE_RECENT or
+            StatusBarManager.DISABLE_SEARCH
+
     fun disableStatusBar(context: Context): StatusBarManager? {
         val statusBarManager = context.getSystemService(StatusBarManager::class.java)
         statusBarManager?.also {
             if (LOGV) {
-                Log.v(SetupWizardApp.TAG, "Disabling status bar")
+                Log.v(SetupWizardApp.TAG, "Locking down status bar (kept visible)")
             }
-            it.setDisabledForSetup(true)
+            it.disable(SETUP_DISABLE_FLAGS)
         } ?: Log.w(SetupWizardApp.TAG, "Skip disabling status bar - could not get StatusBarManager")
         return statusBarManager
     }
@@ -107,7 +125,7 @@ object SetupWizardUtils {
             if (LOGV) {
                 Log.v(SetupWizardApp.TAG, "Enabling status bar")
             }
-            it.setDisabledForSetup(false)
+            it.disable(StatusBarManager.DISABLE_NONE)
         } ?: Log.w(SetupWizardApp.TAG, "Skip enabling status bar - could not get StatusBarManager")
     }
 
