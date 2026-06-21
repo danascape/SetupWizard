@@ -127,21 +127,10 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
      * button is only added when [showSkipButton] is true.
      */
     private fun setupFooterBar() {
-        val mixin = getGlifLayout().getMixin(FooterBarMixin::class.java)
-        footerBarMixin = mixin
-
-        nextButton =
-            FooterButton.Builder(this)
-                .setText(R.string.next)
-                .setListener { onNextPressed() }
-                .setButtonType(FooterButton.ButtonType.NEXT)
-                .build()
-                .also { mixin.setPrimaryButton(it) }
-
-        applyPrimaryButtonColors()
+        installPrimaryButton(R.string.next) { onNextPressed() }
 
         if (showSkipButton) {
-            mixin.setSecondaryButton(
+            getFooterBarMixin().setSecondaryButton(
                 FooterButton.Builder(this)
                     .setText(R.string.skip)
                     .setListener { onSkipPressed() }
@@ -151,6 +140,32 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
         }
     }
 
+    /** The [GlifLayout]'s [FooterBarMixin], for screens that configure footer buttons themselves. */
+    protected fun getFooterBarMixin(): FooterBarMixin =
+        getGlifLayout().getMixin(FooterBarMixin::class.java)
+
+    /**
+     * Installs the filled primary footer button with the given label and click action, pinning its
+     * colors via [applyPrimaryButtonColors]. Screens that don't use the default "next" button (e.g.
+     * Welcome's "Start") can call this directly instead of relying on [installFooterBar].
+     */
+    protected fun installPrimaryButton(
+        textResId: Int,
+        buttonType: Int = FooterButton.ButtonType.NEXT,
+        listener: () -> Unit,
+    ) {
+        val mixin = getFooterBarMixin()
+        footerBarMixin = mixin
+        nextButton =
+            FooterButton.Builder(this)
+                .setText(textResId)
+                .setListener { listener() }
+                .setButtonType(buttonType)
+                .build()
+                .also { mixin.setPrimaryButton(it) }
+        applyPrimaryButtonColors()
+    }
+
     /**
      * Pin the filled primary (next) button to the framework dynamic primary / on-primary color pair
      * directly on the inflated view. FooterBarMixin's own color pipeline
@@ -158,7 +173,7 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
      * fail to contrast with the fill. This must be re-applied whenever the button's enabled state
      * or text changes, because FooterBarMixin re-applies its own text color on those events.
      */
-    private fun applyPrimaryButtonColors() {
+    protected fun applyPrimaryButtonColors() {
         footerBarMixin?.primaryButtonView?.apply {
             backgroundTintList =
                 ColorStateList.valueOf(getColor(R.color.setup_footer_primary_button_background))
