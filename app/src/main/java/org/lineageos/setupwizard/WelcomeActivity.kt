@@ -14,11 +14,11 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
 import com.google.android.setupcompat.util.SystemBarHelper
+import com.google.android.setupdesign.R as SudR
 import com.google.android.setupdesign.template.FloatingBackButtonMixin
 import org.lineageos.setupwizard.SetupWizardApp.Companion.ACTION_EMERGENCY_DIAL
 import org.lineageos.setupwizard.base.SubBaseActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
-import com.google.android.setupdesign.R as SudR
 
 class WelcomeActivity : SubBaseActivity() {
 
