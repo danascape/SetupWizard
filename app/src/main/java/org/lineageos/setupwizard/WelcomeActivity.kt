@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.setupcompat.template.FooterButton
-import com.google.android.setupcompat.util.SystemBarHelper
 import org.lineageos.setupwizard.SetupWizardApp.Companion.ACTION_EMERGENCY_DIAL
 import org.lineageos.setupwizard.base.SubBaseActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
@@ -26,7 +25,7 @@ class WelcomeActivity : SubBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onSetupStart()
-        SystemBarHelper.setBackButtonVisible(window, false)
+        disableBackButton()
 
         findViewById<View>(R.id.launch_accessibility).setOnClickListener {
             startSubactivity(Intent(ACTION_ACCESSIBILITY_SETTINGS))
@@ -69,8 +68,6 @@ class WelcomeActivity : SubBaseActivity() {
             )
         }
     }
-
-    override fun onBackPressed() {}
 
     override val layoutResId: Int = R.layout.welcome_activity
 

@@ -7,9 +7,7 @@
 package org.lineageos.setupwizard
 
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import com.google.android.setupcompat.template.FooterButton
-import com.google.android.setupcompat.util.SystemBarHelper
 import org.lineageos.setupwizard.base.BaseSetupWizardActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
 
@@ -26,15 +24,7 @@ class FinishActivity : BaseSetupWizardActivity() {
         }
 
         // This is the terminal screen: there's nothing to go back to.
-        SystemBarHelper.setBackButtonVisible(window, false)
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    // no-op
-                }
-            },
-        )
+        disableBackButton()
     }
 
     override val layoutResId: Int = R.layout.finish_activity

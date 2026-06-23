@@ -26,8 +26,10 @@ import com.android.settingslib.Utils
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupcompat.template.FooterButton
 import com.google.android.setupcompat.util.ResultCodes.RESULT_SKIP
+import com.google.android.setupcompat.util.SystemBarHelper
 import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.android.setupdesign.GlifLayout
+import com.google.android.setupdesign.template.FloatingBackButtonMixin
 import com.google.android.setupdesign.transition.TransitionHelper
 import com.google.android.setupdesign.util.ThemeHelper
 import org.lineageos.setupwizard.R
@@ -280,6 +282,25 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
     }
 
     protected fun getGlifLayout(): GlifLayout = requireViewById(R.id.setup_wizard_layout)
+
+    /**
+     * Fully disables "back" on a screen that has nowhere to go back to (e.g. the first and last
+     * screens): hides the system nav back button, hides the GLIF Expressive floating back button,
+     * and consumes gesture/predictive back via a no-op callback that takes priority over the base
+     * dispatcher callback registered in [onCreate].
+     */
+    protected fun disableBackButton() {
+        SystemBarHelper.setBackButtonVisible(window, false)
+        getGlifLayout().getMixin(FloatingBackButtonMixin::class.java)?.setVisibility(View.GONE)
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // no-op: back is intentionally disabled on this screen
+                }
+            },
+        )
+    }
 
     protected open val layoutResId: Int = -1
 
