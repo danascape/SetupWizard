@@ -20,4 +20,8 @@
     <dimen name="welcome_title_padding_bottom">16dp</dimen>
     <dimen name="welcome_title_line_height">64dp</dimen>
     <dimen name="welcome_accessibility_text_size">20sp</dimen>
+
+    <dimen name="setup_design_layout_margin_start">@dimen/sud_glif_expressive_margin_start</dimen>
+    <dimen name="setup_design_layout_margin_end">@dimen/sud_glif_expressive_margin_end</dimen>
+    <dimen name="setup_design_icon_margin_top">@dimen/sud_glif_expressive_icon_margin_top</dimen>
 </resources>
