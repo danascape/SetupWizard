@@ -30,6 +30,7 @@
 
         <SwitchItem
             android:id="@+id/time_format_item"
+            android:layout="@layout/setup_items_switch"
             android:title="@string/setup_24_hour_format" />
 
     </SectionItem>

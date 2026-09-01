@@ -77,16 +77,14 @@ class LineageSettingsActivity : BaseSetupWizardActivity() {
     /** Privacy policy blurb, with the policy URL emphasized on a line of its own. */
     private fun buildDescription(osName: String): CharSequence {
         val privacyPolicyUri = getString(R.string.services_privacy_policy_uri)
-        // The URI is no longer part of the sentence, pass it along anyway so that translations
-        // still carrying the placeholder keep rendering.
-        val policySummary = getString(R.string.services_find_privacy_policy, privacyPolicyUri)
+        val policySummary = getString(R.string.services_find_privacy_policy)
         val privacyPolicy = getString(R.string.services_pp_explanation, osName)
 
         return SpannableStringBuilder(
                 getString(R.string.services_full_description, privacyPolicy, policySummary)
             )
             .apply {
-                append("\n")
+                append("\n\n")
                 val uriStart = length
                 append(privacyPolicyUri)
                 setSpan(

@@ -8,10 +8,12 @@
     <!-- Summary is filled in at runtime, it embeds the OS name -->
     <SwitchItem
         android:id="@+id/metrics_item"
+        android:layout="@layout/setup_items_switch"
         android:title="@string/services_metrics_title" />
 
     <SwitchItem
         android:id="@+id/nav_keys_item"
+        android:layout="@layout/setup_items_switch"
         android:title="@string/services_os_nav_keys_label" />
 
 </ItemGroup>

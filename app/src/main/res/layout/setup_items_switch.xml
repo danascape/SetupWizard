@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- Based on sud_items_switch.xml, swapping the SwitchCompat for a MaterialSwitch so that
+     SwitchItem applies the expressive thumb icon to it. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/sudItemContainerStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@id/sud_items_icon_container"
+        style="?attr/sudItemIconContainerStyle"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start">
+
+        <ImageView
+            android:id="@id/sud_items_icon"
+            style="?attr/sudItemIconStyle"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <com.google.android.setupdesign.view.RichTextView
+            android:id="@id/sud_items_title"
+            style="?attr/sudItemTitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:labelFor="@id/sud_items_switch"
+            android:textAlignment="viewStart"
+            tools:ignore="UnusedAttribute" />
+
+        <com.google.android.setupdesign.view.RichTextView
+            android:id="@id/sud_items_summary"
+            style="?attr/sudItemSummaryStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textAlignment="viewStart"
+            android:visibility="gone"
+            tools:ignore="UnusedAttribute" />
+
+    </LinearLayout>
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@id/sud_items_switch"
+        style="@style/SudExpressiveSwitchBarStyle"
+        android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
+
+</LinearLayout>
