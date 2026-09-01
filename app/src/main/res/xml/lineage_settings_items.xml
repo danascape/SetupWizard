@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<ItemGroup xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Summary is filled in at runtime, it embeds the OS name -->
+    <SwitchItem
+        android:id="@+id/metrics_item"
+        android:title="@string/services_metrics_title" />
+
+    <SwitchItem
+        android:id="@+id/nav_keys_item"
+        android:title="@string/services_os_nav_keys_label" />
+
+</ItemGroup>
