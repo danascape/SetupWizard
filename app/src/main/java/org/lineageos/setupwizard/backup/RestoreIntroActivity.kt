@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import com.google.android.setupcompat.util.ResultCodes.RESULT_ACTIVITY_NOT_FOUND
+import com.google.android.setupcompat.util.ResultCodes.RESULT_SKIP
 import org.lineageos.setupwizard.R
 import org.lineageos.setupwizard.SetupWizardApp.Companion.ACTION_RESTORE_FROM_BACKUP
 import org.lineageos.setupwizard.base.SubBaseActivity
@@ -21,6 +22,8 @@ class RestoreIntroActivity : SubBaseActivity() {
         glifLayout.setDescriptionText(
             getString(R.string.intro_restore_subtitle, getString(R.string.os_name))
         )
+        setNextText(R.string.skip)
+        setSkipText(R.string.intro_restore_button)
     }
 
     override fun onSubactivityResult(activityResult: ActivityResult) {
@@ -38,6 +41,10 @@ class RestoreIntroActivity : SubBaseActivity() {
     }
 
     override fun onNextPressed() {
+        nextAction(RESULT_SKIP)
+    }
+
+    override fun onSkipPressed() {
         launchRestore()
     }
 
