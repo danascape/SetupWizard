@@ -16,21 +16,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Takes the place the floating back button occupies on every other screen. -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/emerg_dialer"
-            style="?attr/materialIconButtonFilledStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/welcome_action_button_margin_start"
-            android:layout_marginTop="@dimen/welcome_action_button_margin_top"
-            android:contentDescription="@string/emergency_call"
-            android:minWidth="@dimen/welcome_action_button_size"
-            android:minHeight="@dimen/welcome_action_button_size"
-            app:backgroundTint="?attr/colorSurfaceContainerHigh"
-            app:icon="@drawable/ic_emergency_dial"
-            app:iconTint="?attr/colorOnSurface" />
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -64,34 +49,29 @@
                 android:layout_height="wrap_content"
                 android:hyphenationFrequency="none"
                 android:paddingBottom="@dimen/welcome_content_container_padding_bottom" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/launch_accessibility"
-                style="?attr/materialIconButtonFilledStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:paddingStart="@dimen/welcome_label_button_padding_horizontal"
-                android:paddingEnd="@dimen/welcome_label_button_padding_horizontal"
-                android:paddingTop="@dimen/welcome_label_button_padding_vertical"
-                android:paddingBottom="@dimen/welcome_label_button_padding_vertical"
-                android:text="@string/accessibility_settings"
-                android:textSize="@dimen/welcome_accessibility_text_size"
-                app:backgroundTint="?attr/colorSurfaceContainerHigh"
-                app:icon="@drawable/ic_eye"
-                app:iconGravity="textStart"
-                app:iconPadding="@dimen/welcome_label_button_icon_padding"
-                app:iconTint="?attr/colorOnSurface" />
         </LinearLayout>
 
+        <!-- Sits where the footer bar does on every other screen. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/welcome_content_container_padding_start"
-            android:paddingEnd="@dimen/welcome_content_container_padding_end"
-            android:paddingTop="@dimen/welcome_footer_padding_top"
-            android:paddingBottom="@dimen/welcome_content_container_padding_bottom">
+            android:paddingStart="?attr/sucFooterBarPaddingStart"
+            android:paddingEnd="?attr/sucFooterBarPaddingEnd"
+            android:paddingTop="?attr/sucFooterBarPaddingTop"
+            android:paddingBottom="?attr/sucFooterBarPaddingBottom">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/launch_accessibility"
+                style="@style/WelcomeIconButton"
+                android:layout_width="@dimen/welcome_footer_button_size"
+                android:layout_height="@dimen/welcome_footer_button_size"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/welcome_footer_button_spacing"
+                android:contentDescription="@string/accessibility_settings"
+                app:icon="@drawable/ic_accessibility"
+                app:iconSize="@dimen/welcome_accessibility_icon_size"
+                app:iconTint="?attr/colorOnSurface" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/skip"
@@ -99,20 +79,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/welcome_footer_padding_top"
+                android:layout_marginEnd="@dimen/welcome_footer_button_spacing"
                 android:text="@string/skip"
                 android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/start"
-                style="?attr/materialIconButtonFilledStyle"
+                style="?attr/materialButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/start"
-                android:minHeight="@dimen/welcome_start_button_min_height"
+                android:minHeight="@dimen/welcome_footer_button_size"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/start"
+                android:textSize="@dimen/welcome_start_button_text_size"
                 app:icon="@drawable/ic_arrow_forward"
                 app:iconGravity="textStart"
+                app:iconPadding="@dimen/welcome_start_button_icon_padding"
                 app:iconSize="@dimen/welcome_start_button_icon_size" />
         </LinearLayout>
     </LinearLayout>
