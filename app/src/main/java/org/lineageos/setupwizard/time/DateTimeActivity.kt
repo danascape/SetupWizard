@@ -23,9 +23,9 @@ import android.widget.SimpleAdapter
 import android.widget.TimePicker
 import androidx.appcompat.app.AlertDialog
 import com.android.settingslib.datetime.ZoneGetter
-import com.google.android.setupdesign.GlifListLayout
+import com.google.android.setupdesign.GlifRecyclerLayout
 import com.google.android.setupdesign.items.Item
-import com.google.android.setupdesign.items.ItemAdapter
+import com.google.android.setupdesign.items.RecyclerItemAdapter
 import com.google.android.setupdesign.items.SwitchItem
 import java.util.Calendar
 import java.util.Date
@@ -39,8 +39,9 @@ class DateTimeActivity :
     TimePickerDialog.OnTimeSetListener,
     DatePickerDialog.OnDateSetListener {
 
-    private val listLayout by lazy { glifLayout as GlifListLayout }
-    private val itemAdapter by lazy { listLayout.adapter as ItemAdapter }
+    private val itemAdapter by lazy {
+        (glifLayout as GlifRecyclerLayout).adapter as RecyclerItemAdapter
+    }
 
     private val dateItem by lazy { itemAdapter.findItemById(R.id.date_item) as Item }
     private val dateFormatItem by lazy { itemAdapter.findItemById(R.id.date_format_item) as Item }
@@ -68,12 +69,12 @@ class DateTimeActivity :
         timeFormatItem.isChecked = DateFormat.is24HourFormat(this)
         timeFormatItem.setOnCheckedChangeListener { _, isChecked -> set24HourFormat(isChecked) }
 
-        listLayout.listView.setOnItemClickListener { _, view, position, _ ->
-            when (listLayout.listView.getItemAtPosition(position)) {
+        itemAdapter.setOnItemSelectedListener { item ->
+            when (item) {
                 dateItem -> showDatePicker()
                 timeItem -> showTimePicker()
                 timeZoneItem -> showTimeZonePicker()
-                timeFormatItem -> timeFormatItem.toggle(view)
+                timeFormatItem -> timeFormatItem.isChecked = !timeFormatItem.isChecked
             }
         }
 

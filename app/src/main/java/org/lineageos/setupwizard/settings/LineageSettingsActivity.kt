@@ -13,8 +13,8 @@ import android.os.UserHandle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import com.google.android.setupdesign.GlifListLayout
-import com.google.android.setupdesign.items.ItemAdapter
+import com.google.android.setupdesign.GlifRecyclerLayout
+import com.google.android.setupdesign.items.RecyclerItemAdapter
 import com.google.android.setupdesign.items.SwitchItem
 import lineageos.hardware.LineageHardwareManager
 import lineageos.providers.LineageSettings
@@ -26,13 +26,14 @@ import org.lineageos.setupwizard.base.BaseSetupWizardActivity
 
 class LineageSettingsActivity : BaseSetupWizardActivity() {
 
-    private val listLayout by lazy { glifLayout as GlifListLayout }
-    private val itemAdapter by lazy { listLayout.adapter as ItemAdapter }
+    private val itemAdapter by lazy {
+        (glifLayout as GlifRecyclerLayout).adapter as RecyclerItemAdapter
+    }
 
     private val metricsItem by lazy { itemAdapter.findItemById(R.id.metrics_item) as SwitchItem }
     private val navKeysItem by lazy { itemAdapter.findItemById(R.id.nav_keys_item) as SwitchItem }
 
-    private var supportsKeyDisabler = false
+    private var supportsKeyDisabler = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +55,9 @@ class LineageSettingsActivity : BaseSetupWizardActivity() {
             SetupWizardApp.settingsBundle.putBoolean(DISABLE_NAV_KEYS, isChecked)
         }
 
-        listLayout.listView.setOnItemClickListener { _, view, position, _ ->
-            when (val item = listLayout.listView.getItemAtPosition(position)) {
-                metricsItem,
-                navKeysItem -> (item as SwitchItem).toggle(view)
+        itemAdapter.setOnItemSelectedListener { item ->
+            if (item is SwitchItem) {
+                item.isChecked = !item.isChecked
             }
         }
     }
@@ -128,7 +128,7 @@ class LineageSettingsActivity : BaseSetupWizardActivity() {
     companion object {
         private fun isKeyDisablerSupported(context: Context): Boolean {
             val hardware = LineageHardwareManager.getInstance(context)
-            return hardware.isSupported(LineageHardwareManager.FEATURE_KEY_DISABLE)
+            return true
         }
     }
 }
