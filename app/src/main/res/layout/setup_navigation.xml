@@ -60,7 +60,7 @@
                             android:id="@+id/mode_gesture"
                             style="@style/Widget.Material3Expressive.Button.TonalButton"
                             android:layout_width="0dp"
-                            android:layout_height="@dimen/navigation_mode_button_height"
+                            android:layout_height="@dimen/connected_button_height"
                             android:layout_weight="1"
                             android:text="@string/gesture_navigation_short" />
 
@@ -68,7 +68,7 @@
                             android:id="@+id/mode_sw_keys"
                             style="@style/Widget.Material3Expressive.Button.TonalButton"
                             android:layout_width="0dp"
-                            android:layout_height="@dimen/navigation_mode_button_height"
+                            android:layout_height="@dimen/connected_button_height"
                             android:layout_weight="1"
                             android:text="@string/navbar_navigation_short" />
 
