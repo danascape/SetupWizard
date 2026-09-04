@@ -23,6 +23,7 @@ import org.lineageos.setupwizard.SetupWizardApp.Companion.DISABLE_NAV_KEYS
 import org.lineageos.setupwizard.SetupWizardApp.Companion.NAVIGATION_OPTION_KEY
 import org.lineageos.setupwizard.base.BaseSetupWizardActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
+import org.lineageos.setupwizard.util.updateCheckedIcons
 
 class NavigationSettingsActivity : BaseSetupWizardActivity() {
 
@@ -72,7 +73,7 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
                     setHintRevealed(revealed = false, animate = true)
                 }
             }
-            updateCheckedIcons(modeGroup)
+            modeGroup.updateCheckedIcons(R.drawable.ic_check)
             navigationIllustration.playAnimation()
         }
 
@@ -96,23 +97,11 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
             finishAction(RESULT_OK)
         }
 
-        updateCheckedIcons(modeGroup)
+        modeGroup.updateCheckedIcons(R.drawable.ic_check)
 
         // The offset is the card's height, so it can only be applied once laid out.
         navigationControls.post {
             setHintRevealed(selection == NAV_BAR_MODE_GESTURAL_OVERLAY, animate = false)
-        }
-    }
-
-    /** Only the checked segment carries the check mark, as in a Material segmented button. */
-    private fun updateCheckedIcons(modeGroup: MaterialButtonToggleGroup) {
-        for (index in 0 until modeGroup.childCount) {
-            val button = modeGroup.getChildAt(index) as? MaterialButton ?: continue
-            if (button.isChecked) {
-                button.setIconResource(R.drawable.ic_check)
-            } else {
-                button.icon = null
-            }
         }
     }
 
