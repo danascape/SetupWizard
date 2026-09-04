@@ -43,4 +43,11 @@
     <dimen name="swipe_hint_text_rise">12dp</dimen>
 
     <dimen name="time_zone_item_padding_vertical">8dp</dimen>
+
+    <dimen name="navigation_mode_margin_top">24dp</dimen>
+    <dimen name="navigation_mode_button_height">56dp</dimen>
+    <dimen name="navigation_hint_margin_top">8dp</dimen>
+    <dimen name="navigation_hint_slide">12dp</dimen>
+    <dimen name="navigation_hint_padding_horizontal">24dp</dimen>
+    <dimen name="navigation_hint_padding_vertical">20dp</dimen>
 </resources>
