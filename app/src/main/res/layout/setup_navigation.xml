@@ -78,15 +78,15 @@
                         android:id="@+id/hide_navigation_hint_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/navigation_hint_margin_top"
+                        android:layout_marginTop="@dimen/control_card_margin_top"
                         android:background="@drawable/setup_item_card_background"
                         android:baselineAligned="false"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingStart="@dimen/navigation_hint_padding_horizontal"
-                        android:paddingTop="@dimen/navigation_hint_padding_vertical"
-                        android:paddingEnd="@dimen/navigation_hint_padding_horizontal"
-                        android:paddingBottom="@dimen/navigation_hint_padding_vertical">
+                        android:paddingStart="@dimen/control_card_padding_horizontal"
+                        android:paddingTop="@dimen/control_card_padding_vertical"
+                        android:paddingEnd="@dimen/control_card_padding_horizontal"
+                        android:paddingBottom="@dimen/control_card_padding_vertical">
 
                         <com.google.android.setupdesign.view.RichTextView
                             style="?attr/sudItemTitleStyle"

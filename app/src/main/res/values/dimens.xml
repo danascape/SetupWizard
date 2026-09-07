@@ -46,9 +46,9 @@
 
     <dimen name="connected_button_height">56dp</dimen>
 
+    <dimen name="control_card_margin_top">8dp</dimen>
+    <dimen name="control_card_padding_horizontal">24dp</dimen>
+    <dimen name="control_card_padding_vertical">20dp</dimen>
+
     <dimen name="navigation_mode_margin_top">24dp</dimen>
-    <dimen name="navigation_hint_margin_top">8dp</dimen>
-    <dimen name="navigation_hint_slide">12dp</dimen>
-    <dimen name="navigation_hint_padding_horizontal">24dp</dimen>
-    <dimen name="navigation_hint_padding_vertical">20dp</dimen>
 </resources>
