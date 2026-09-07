@@ -8,7 +8,6 @@ package org.lineageos.setupwizard.settings
 import android.os.Bundle
 import android.os.UserHandle
 import android.view.View
-import android.view.ViewGroup.MarginLayoutParams
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY
 import com.airbnb.lottie.LottieAnimationView
@@ -23,6 +22,7 @@ import org.lineageos.setupwizard.SetupWizardApp.Companion.DISABLE_NAV_KEYS
 import org.lineageos.setupwizard.SetupWizardApp.Companion.NAVIGATION_OPTION_KEY
 import org.lineageos.setupwizard.base.BaseSetupWizardActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
+import org.lineageos.setupwizard.util.slideToReveal
 import org.lineageos.setupwizard.util.updateCheckedIcons
 
 class NavigationSettingsActivity : BaseSetupWizardActivity() {
@@ -64,13 +64,21 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
                 R.id.mode_gesture -> {
                     selection = NAV_BAR_MODE_GESTURAL_OVERLAY
                     navigationIllustration.setAnimation(R.raw.lottie_system_nav_fully_gestural)
-                    setHintRevealed(revealed = true, animate = true)
+                    navigationControls.slideToReveal(
+                        hideGesturalHintCard,
+                        revealed = true,
+                        animate = true,
+                    )
                 }
 
                 R.id.mode_sw_keys -> {
                     selection = NAV_BAR_MODE_3BUTTON_OVERLAY
                     navigationIllustration.setAnimation(R.raw.lottie_system_nav_3_button)
-                    setHintRevealed(revealed = false, animate = true)
+                    navigationControls.slideToReveal(
+                        hideGesturalHintCard,
+                        revealed = false,
+                        animate = true,
+                    )
                 }
             }
             modeGroup.updateCheckedIcons(R.drawable.ic_check)
@@ -101,41 +109,12 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
 
         // The offset is the card's height, so it can only be applied once laid out.
         navigationControls.post {
-            setHintRevealed(selection == NAV_BAR_MODE_GESTURAL_OVERLAY, animate = false)
+            navigationControls.slideToReveal(
+                hideGesturalHintCard,
+                revealed = selection == NAV_BAR_MODE_GESTURAL_OVERLAY,
+                animate = false,
+            )
         }
-    }
-
-    /**
-     * The hint only applies to gestural navigation. Rather than animating the card itself, the
-     * controls slide down over it by its own height, so that picking gestures looks like the
-     * buttons moving up to make room for it.
-     */
-    private fun setHintRevealed(revealed: Boolean, animate: Boolean) {
-        navigationControls.animate().cancel()
-
-        val margin = (hideGesturalHintCard.layoutParams as MarginLayoutParams).topMargin
-        val offset = if (revealed) 0f else (hideGesturalHintCard.height + margin).toFloat()
-
-        if (revealed) {
-            hideGesturalHintCard.visibility = View.VISIBLE
-        }
-
-        // Before the first layout the offset is not known yet, so settle into place instead.
-        if (!animate || !hideGesturalHintCard.isLaidOut) {
-            navigationControls.translationY = offset
-            hideGesturalHintCard.visibility = if (revealed) View.VISIBLE else View.INVISIBLE
-            return
-        }
-
-        navigationControls
-            .animate()
-            .translationY(offset)
-            .setDuration(HINT_ANIM_DURATION_MS)
-            .withEndAction {
-                if (!revealed) {
-                    hideGesturalHintCard.visibility = View.INVISIBLE
-                }
-            }
     }
 
     override fun onNextPressed() {
@@ -155,8 +134,4 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
     override val titleResId: Int = R.string.setup_navigation
 
     override val iconResId: Int = R.drawable.ic_navigation
-
-    companion object {
-        private const val HINT_ANIM_DURATION_MS = 200L
-    }
 }
