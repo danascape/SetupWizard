@@ -68,7 +68,6 @@ class LocaleActivity : BaseSetupWizardActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SystemBarHelper.setBackButtonVisible(window, true)
-        setNextText(R.string.next)
         currentLocale = Locale.getDefault()
         loadLanguages()
         fetchAndUpdateSimLocale()
