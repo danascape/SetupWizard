@@ -62,7 +62,6 @@ class LocaleActivity : BaseSetupWizardActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SystemBarHelper.setBackButtonVisible(window, true)
-        setNextText(R.string.next)
         languagePicker = findViewById(R.id.locale_list)
         languagePicker.setNextRight(nextButton.id)
         languagePicker.requestFocus()
