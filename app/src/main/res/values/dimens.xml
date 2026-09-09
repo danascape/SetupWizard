@@ -20,6 +20,7 @@
     <dimen name="welcome_title_padding_bottom">16dp</dimen>
     <dimen name="welcome_title_line_height">64dp</dimen>
 
+    <dimen name="welcome_top_button_spacing">8dp</dimen>
     <dimen name="welcome_chip_text_size">14sp</dimen>
     <dimen name="welcome_chip_padding_horizontal">16dp</dimen>
     <dimen name="welcome_emergency_icon_padding">8dp</dimen>
@@ -44,6 +45,9 @@
     <dimen name="swipe_hint_text_rise">12dp</dimen>
 
     <dimen name="time_zone_item_padding_vertical">8dp</dimen>
+
+    <dimen name="device_info_barcode_height">44dp</dimen>
+    <dimen name="device_info_barcode_margin_top">12dp</dimen>
 
     <dimen name="connected_button_height">56dp</dimen>
 
