@@ -35,6 +35,8 @@
     <style name="WelcomeIconButton" parent="Widget.Material3.Button.IconButton.Outlined">
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
         <item name="android:padding">0dp</item>
         <item name="android:gravity">center</item>
         <item name="android:minWidth">0dp</item>

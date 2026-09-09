@@ -27,6 +27,7 @@
     <dimen name="welcome_footer_button_size">72dp</dimen>
     <dimen name="welcome_footer_button_radius">36dp</dimen>
     <dimen name="welcome_footer_button_spacing">16dp</dimen>
+    <item name="welcome_start_button_inset_weight" format="float" type="dimen">0.25</item>
     <dimen name="welcome_start_button_text_size">18sp</dimen>
     <dimen name="welcome_start_button_icon_size">24dp</dimen>
     <dimen name="welcome_start_button_icon_padding">12dp</dimen>
