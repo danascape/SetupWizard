@@ -73,6 +73,11 @@
                 app:iconSize="@dimen/welcome_accessibility_icon_size"
                 app:iconTint="?attr/colorOnSurface" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="@dimen/welcome_start_button_inset_weight" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/start"
                 style="?attr/materialButtonStyle"
