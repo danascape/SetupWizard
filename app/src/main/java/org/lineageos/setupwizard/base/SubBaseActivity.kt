@@ -10,7 +10,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieProperty
+import com.airbnb.lottie.model.KeyPath
+import com.android.settingslib.Utils
 import com.google.android.setupcompat.util.ResultCodes.RESULT_ACTIVITY_NOT_FOUND
+import com.google.android.setupdesign.lottieloadinglayout.R as SudLoadingR
 import org.lineageos.setupwizard.R
 import org.lineageos.setupwizard.SetupWizardApp
 
@@ -27,6 +32,8 @@ abstract class SubBaseActivity : BaseSetupWizardActivity() {
             Log.d(TAG, "onCreate savedInstanceState=$savedInstanceState")
         }
         super.onCreate(savedInstanceState)
+
+        tintLoadingIllustration()
 
         subactivityResultLauncher =
             registerForActivityResult(StartDecoratedActivityForResult(), this::onSubactivityResult)
@@ -88,6 +95,12 @@ abstract class SubBaseActivity : BaseSetupWizardActivity() {
             data?.getBooleanExtra("onBackPressed", false) == true -> onStartSubactivity()
             else -> finishAction(RESULT_CANCELED)
         }
+    }
+
+    private fun tintLoadingIllustration() {
+        val lottieView = findViewById<LottieAnimationView>(SudLoadingR.id.sud_lottie_view) ?: return
+        val accent = Utils.getColorAccent(lottieView.context).defaultColor
+        lottieView.addValueCallback(KeyPath("**"), LottieProperty.STROKE_COLOR) { accent }
     }
 
     override val layoutResId: Int = R.layout.setup_loading_page
