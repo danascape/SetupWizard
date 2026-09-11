@@ -201,9 +201,7 @@ class LocaleActivity : BaseSetupWizardActivity() {
             val locale = simLocale() ?: return@execute
             handler.post {
                 if (
-                    locale == Locale.getDefault() ||
-                        setupWizardApp.ignoreSimLocale ||
-                        isDestroyed
+                    locale == Locale.getDefault() || setupWizardApp.ignoreSimLocale || isDestroyed
                 ) {
                     return@post
                 }
@@ -236,7 +234,8 @@ class LocaleActivity : BaseSetupWizardActivity() {
         }
 
         val subscriptionManager = getSystemService(SubscriptionManager::class.java)
-        val activeSub = subscriptionManager?.activeSubscriptionInfoList?.firstOrNull() ?: return null
+        val activeSub =
+            subscriptionManager?.activeSubscriptionInfoList?.firstOrNull() ?: return null
 
         // Fetch locale for active sim's MCC
         val mccString = activeSub.mccString
