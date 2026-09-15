@@ -4,7 +4,9 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <!-- Added to the template's top end row, ahead of the floating action button, so that it lines up
-     with the emergency dialer opposite it. Styled after setupdesign's own sud_action_button. -->
+     with the emergency dialer opposite it. Styled after setupdesign's own sud_action_button.
+     The top margin matches the one the template gives both floating button containers, so this
+     button keeps the dialer's baseline even when the action button container is hidden. -->
 <com.google.android.material.button.MaterialButton
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,7 +14,7 @@
     style="?attr/materialIconButtonFilledStyle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
+    android:layout_marginTop="@dimen/sud_glif_expressive_back_button_margin_top"
     android:layout_marginEnd="@dimen/welcome_top_button_spacing"
     android:contentDescription="@string/device_info"
     android:minWidth="@dimen/sud_glif_expressive_back_button_min_size"
