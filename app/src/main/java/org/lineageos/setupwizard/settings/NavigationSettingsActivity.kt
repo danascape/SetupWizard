@@ -22,6 +22,7 @@ import org.lineageos.setupwizard.R
 import org.lineageos.setupwizard.SetupWizardApp
 import org.lineageos.setupwizard.base.BaseSetupWizardActivity
 import org.lineageos.setupwizard.util.SetupWizardUtils
+import org.lineageos.setupwizard.util.updateCheckedIcons
 
 class NavigationSettingsActivity : BaseSetupWizardActivity() {
 
@@ -68,7 +69,7 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
                     setHintRevealed(revealed = false)
                 }
             }
-            updateCheckedIcons(modeGroup)
+            modeGroup.updateCheckedIcons(R.drawable.ic_check)
             navigationIllustration.playAnimation()
         }
 
@@ -92,20 +93,9 @@ class NavigationSettingsActivity : BaseSetupWizardActivity() {
             finishAction(RESULT_OK)
         }
 
-        updateCheckedIcons(modeGroup)
+        modeGroup.updateCheckedIcons(R.drawable.ic_check)
 
         setHintRevealed(selection == NAV_BAR_MODE_GESTURAL_OVERLAY)
-    }
-
-    private fun updateCheckedIcons(modeGroup: MaterialButtonToggleGroup) {
-        for (index in 0 until modeGroup.childCount) {
-            val button = modeGroup.getChildAt(index) as? MaterialButton ?: continue
-            if (button.isChecked) {
-                button.setIconResource(R.drawable.ic_check)
-            } else {
-                button.icon = null
-            }
-        }
     }
 
     private fun setHintRevealed(revealed: Boolean) {
