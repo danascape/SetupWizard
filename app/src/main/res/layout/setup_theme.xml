@@ -32,7 +32,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/theme_preview_margin_top">
+                    android:layout_marginTop="@dimen/preview_margin_top">
 
                     <ImageView
                         android:id="@+id/theme_preview_wallpaper"

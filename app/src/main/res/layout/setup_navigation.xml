@@ -32,8 +32,9 @@
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/navigation_illustration"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="@dimen/preview_margin_top"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/lottie_system_nav_fully_gestural" />
@@ -43,7 +44,7 @@
                     style="@style/Widget.Material3Expressive.MaterialButtonGroup.Connected"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/navigation_mode_margin_top"
+                    android:layout_marginTop="@dimen/control_card_margin_top"
                     app:checkedButton="@+id/mode_gesture"
                     app:selectionRequired="true"
                     app:singleSelection="true">
@@ -96,6 +97,12 @@
                         android:layout_gravity="center_vertical" />
 
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
