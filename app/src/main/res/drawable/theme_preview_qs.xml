@@ -5,14 +5,14 @@
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="412dp"
-    android:height="394dp"
+    android:height="412dp"
     android:viewportWidth="412"
-    android:viewportHeight="394">
+    android:viewportHeight="412">
     <group>
         <clip-path
-            android:pathData="M0,28C0,12.54 12.54,0 28,0H384C399.46,0 412,12.54 412,28V366C412,381.46 399.46,394 384,394H28C12.54,394 0,381.46 0,366V28Z"/>
+            android:pathData="M0,28C0,12.54 12.54,0 28,0H384C399.46,0 412,12.54 412,28V412H0V28Z"/>
         <path
-            android:pathData="M0,0h412v394h-412z"
+            android:pathData="M0,0h412v412h-412z"
             android:fillColor="?attr/colorSurfaceContainerHigh"
             android:fillAlpha="0.8"/>
         <path

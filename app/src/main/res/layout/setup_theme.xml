@@ -32,7 +32,11 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/preview_margin_top">
+                    android:layout_marginTop="@dimen/preview_margin_top"
+                    android:background="@drawable/setup_item_card_background"
+                    android:paddingStart="@dimen/preview_card_padding"
+                    android:paddingTop="@dimen/preview_card_padding"
+                    android:paddingEnd="@dimen/preview_card_padding">
 
                     <ImageView
                         android:id="@+id/theme_preview_wallpaper"

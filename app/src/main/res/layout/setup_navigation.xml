@@ -29,15 +29,25 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/navigation_illustration"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
                     android:layout_marginTop="@dimen/preview_margin_top"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/lottie_system_nav_fully_gestural" />
+                    android:background="@drawable/setup_item_card_background"
+                    android:paddingStart="@dimen/preview_card_padding"
+                    android:paddingTop="@dimen/preview_card_padding"
+                    android:paddingEnd="@dimen/preview_card_padding">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/navigation_illustration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lottie_system_nav_fully_gestural" />
+
+                </FrameLayout>
 
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/navigation_mode_group"
