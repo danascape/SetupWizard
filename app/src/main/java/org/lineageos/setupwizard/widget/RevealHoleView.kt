@@ -12,11 +12,11 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
-import android.view.View
+import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import kotlin.math.hypot
 
-class RevealHoleView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+class RevealHoleView(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
     private val holePaint =
         Paint(Paint.ANTI_ALIAS_FLAG).apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
@@ -83,8 +83,9 @@ class RevealHoleView(context: Context, attrs: AttributeSet?) : View(context, att
             )
         }
 
-    override fun onDraw(canvas: Canvas) {
+    override fun dispatchDraw(canvas: Canvas) {
         canvas.drawColor(holeBackgroundColor)
+        super.dispatchDraw(canvas)
         if (holeRadius > 0f) {
             canvas.drawCircle(centerX, centerY, holeRadius, holePaint)
         }

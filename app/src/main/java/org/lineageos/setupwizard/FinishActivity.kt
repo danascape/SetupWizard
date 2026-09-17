@@ -41,13 +41,15 @@ class FinishActivity : BaseSetupWizardActivity() {
     private lateinit var swipeHintIcon: View
     private lateinit var swipeHintText: View
     private lateinit var background: RevealHoleView
+    private lateinit var brandLogoContainer: View
+    private lateinit var brandLogoSolid: View
     private lateinit var brandLogo: ImageView
 
     private var velocityTracker: VelocityTracker? = null
     private var dragStartY = 0f
     private var dragging = false
     private var revealProgress = 0f
-    private var logoPunched = false
+    private var logoMasked = false
 
     private var edgeToEdgeWallpaperBackgroundTheme: Resources.Theme? = null
 
@@ -82,6 +84,8 @@ class FinishActivity : BaseSetupWizardActivity() {
         swipeHintIcon = findViewById(R.id.swipe_hint_icon)
         swipeHintText = findViewById(R.id.swipe_hint_text)
         background = findViewById(R.id.background)
+        brandLogoContainer = findViewById(R.id.brand_logo_container)
+        brandLogoSolid = findViewById(R.id.brand_logo_solid)
         brandLogo = findViewById(R.id.brand_logo)
 
         rootView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
@@ -128,8 +132,8 @@ class FinishActivity : BaseSetupWizardActivity() {
                 .setDuration(ENTRANCE_DURATION_MS)
         }
 
-        brandLogo.alpha = 0f
-        brandLogo
+        brandLogoSolid.alpha = 0f
+        brandLogoSolid
             .animate()
             .alpha(1f)
             .setStartDelay(ENTRANCE_LOGO_DELAY_MS)
@@ -137,22 +141,24 @@ class FinishActivity : BaseSetupWizardActivity() {
     }
 
     private fun endEntranceAnimation() {
-        listOf(swipeHintIcon, swipeHintText, brandLogo).forEach {
+        listOf(swipeHintIcon, swipeHintText, brandLogoSolid).forEach {
             it.animate().cancel()
             it.alpha = 1f
             it.translationY = 0f
         }
     }
 
-    private fun punchLogoOutOfBackground() {
-        if (logoPunched) {
+    private fun maskLogoOntoHomeScreen() {
+        if (logoMasked) {
             return
         }
+        logoMasked = true
         brandLogo.setLayerType(
             View.LAYER_TYPE_HARDWARE,
             Paint().apply { blendMode = BlendMode.DST_OUT },
         )
-        logoPunched = true
+        brandLogoSolid.animate().alpha(0f).setDuration(LOGO_MASK_FADE_MS)
+        brandLogo.animate().alpha(1f).setDuration(LOGO_MASK_FADE_MS)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -162,7 +168,7 @@ class FinishActivity : BaseSetupWizardActivity() {
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 endEntranceAnimation()
-                punchLogoOutOfBackground()
+                maskLogoOntoHomeScreen()
                 dragStartY = event.y
                 dragging = true
                 velocityTracker = VelocityTracker.obtain()
@@ -218,25 +224,30 @@ class FinishActivity : BaseSetupWizardActivity() {
         val left = brandLogo.paddingLeft + (availableWidth - width) / 2f
         val top = brandLogo.paddingTop + (availableHeight - height) / 2f
 
-        brandLogo.pivotX = left + width * MARK_CENTER_X
-        brandLogo.pivotY = top + height * MARK_CENTER_Y
+        // Both copies share the container's geometry, so the container carries the pivot.
+        brandLogoContainer.pivotX = left + width * MARK_CENTER_X
+        brandLogoContainer.pivotY = top + height * MARK_CENTER_Y
     }
 
     private fun applyRevealProgress(progress: Float) {
         revealProgress = progress
         updateLogoPivot()
-        (brandLogo.parent as? View)?.let { parent ->
+        (brandLogoContainer.parent as? View)?.let {
             val parentLocation = IntArray(2)
             val backgroundLocation = IntArray(2)
-            parent.getLocationOnScreen(parentLocation)
+            it.getLocationOnScreen(parentLocation)
             background.getLocationOnScreen(backgroundLocation)
             background.holeCenterX =
-                parentLocation[0] - backgroundLocation[0] + brandLogo.left + brandLogo.pivotX
+                parentLocation[0] - backgroundLocation[0] +
+                    brandLogoContainer.left +
+                    brandLogoContainer.pivotX
             background.holeCenterY =
-                parentLocation[1] - backgroundLocation[1] + brandLogo.top + brandLogo.pivotY
+                parentLocation[1] - backgroundLocation[1] +
+                    brandLogoContainer.top +
+                    brandLogoContainer.pivotY
         }
         background.holeRadius = background.fullRadius * REVEAL_OVERSHOOT * progress
-        brandLogo.apply {
+        brandLogoContainer.apply {
             val scale = LOGO_START_SCALE + (LOGO_END_SCALE - LOGO_START_SCALE) * progress
             scaleX = scale
             scaleY = scale
@@ -337,6 +348,8 @@ class FinishActivity : BaseSetupWizardActivity() {
         private const val SPRING_BACK_DURATION_MS = 200L
 
         private const val REVEAL_OVERSHOOT = 1.35f
+
+        private const val LOGO_MASK_FADE_MS = 180L
 
         private const val LOGO_START_SCALE = 1.2f
         private const val LOGO_END_SCALE = 18f
