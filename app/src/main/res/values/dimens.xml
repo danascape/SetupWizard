@@ -32,6 +32,7 @@
 
     <dimen name="welcome_wide_logo_height">72dp</dimen>
     <dimen name="welcome_wide_start_button_min_width">199dp</dimen>
+    <dimen name="welcome_wide_row_padding_vertical">24dp</dimen>
 
     <dimen name="setup_compat_footer_button_radius">@dimen/sud_glif_expressive_footer_button_radius</dimen>
     <dimen name="setup_design_items_group_corner_radius">20dp</dimen>
@@ -55,6 +56,7 @@
 
     <dimen name="preview_margin_top">24dp</dimen>
     <dimen name="preview_card_padding">40dp</dimen>
+    <dimen name="preview_max_height">9999dp</dimen>
     <dimen name="control_card_margin_top">8dp</dimen>
     <dimen name="control_card_padding_horizontal">24dp</dimen>
     <dimen name="control_card_padding_vertical">20dp</dimen>
