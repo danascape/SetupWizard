@@ -57,4 +57,17 @@
         <item name="android:statusBarColor">?attr/android:windowBackground</item>
         <item name="android:navigationBarColor">?attr/android:windowBackground</item>
     </style>
+    <style name="CollapsedHeaderTitle" parent="@style/SudGlifHeaderTitleExpressive">
+        <item name="android:textSize">@dimen/collapsed_header_title_size</item>
+        <item name="android:lineHeight">@dimen/collapsed_header_title_line_height</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:accessibilityHeading">false</item>
+        <!-- Positioned against the back button in code, the header margins do not apply. -->
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
 </resources>
