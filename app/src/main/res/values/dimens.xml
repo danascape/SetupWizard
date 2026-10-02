@@ -56,6 +56,13 @@
 
     <dimen name="connected_button_height">56dp</dimen>
 
+    <dimen name="collapsed_header_title_size">22sp</dimen>
+    <dimen name="collapsed_header_title_line_height">28sp</dimen>
+    <dimen name="collapsed_header_title_margin_start">8dp</dimen>
+    <dimen name="collapsed_header_title_margin_end">@dimen/sud_glif_expressive_margin_end</dimen>
+    <!-- How far the header scrolls past the back button for the swap to complete. -->
+    <dimen name="collapsed_header_title_distance">48dp</dimen>
+
     <dimen name="preview_margin_top">24dp</dimen>
     <dimen name="preview_card_padding">40dp</dimen>
     <dimen name="preview_max_height">9999dp</dimen>

@@ -34,6 +34,7 @@ import org.lineageos.setupwizard.EXTRA_WIZARD_BUNDLE
 import org.lineageos.setupwizard.LOGV
 import org.lineageos.setupwizard.R
 import org.lineageos.setupwizard.util.SetupWizardUtils
+import org.lineageos.setupwizard.widget.installCollapsingTitle
 import org.lineageos.setupwizard.wizardmanager.WizardManager
 
 abstract class BaseSetupWizardActivity : AppCompatActivity() {
@@ -260,6 +261,7 @@ abstract class BaseSetupWizardActivity : AppCompatActivity() {
         if (iconResId != -1) {
             getDrawable(iconResId)?.mutate()?.let { template.setIcon(it) }
         }
+        (requireViewById<View>(R.id.setup_wizard_layout) as? GlifLayout)?.installCollapsingTitle()
     }
 
     protected val template: SetupTemplate by lazy {
